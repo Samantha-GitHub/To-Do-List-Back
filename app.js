@@ -3,17 +3,20 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
-const indexRouter = require('./routes/index');
-
-const app = express();
-
 const cors = require('cors');
 
-/* Conexion a la BD */
+// Conexion a la BD 
 
 const connect = require('./dbConfig');
 connect()
+
+const indexRouter = require('./routes/index');
+
+// RUTA API
+const apiRouter = require('./routes/api');
+
+// RUTA BACKEND
+const app = express();
 
 
 // view engine setup
@@ -28,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
