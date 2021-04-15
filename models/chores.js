@@ -16,7 +16,7 @@ const getAll = () => {
 const getChoresByUserId = (pId) => {
     return new Promise((resolve, reject) => {
         db.query(
-            'SELECT chores.* FROM chores, user WHERE user.id = chore.fk_user AND user.id = ?',
+            'SELECT chores.* FROM chores, user WHERE user.id = chores.fk_user AND user.id = ?',
             [pId],
             (err, rows) => {
                 if (err) {
@@ -41,7 +41,7 @@ const create = ({
             [
                 title,
                 detail,
-                fk_user
+                fk_user,
             ],
             (err, result) => {
                 if (err) return reject(err);
@@ -59,7 +59,7 @@ const updateByIdToken = ({
 }) => {
     return new Promise((resolve, reject) => {
         db.query(
-            'UPDATE chores set title = ?, detail = ?, WHERE id = ?',
+            'UPDATE chores set title = ?, detail = ? WHERE id = ?',
             [
                 title,
                 detail,
