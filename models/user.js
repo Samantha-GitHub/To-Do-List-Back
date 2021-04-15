@@ -1,7 +1,7 @@
 // ALL USERS
 const getAll = () => {
     return new Promise((resolve, reject) => {
-        db.query('SELECT * FROM users', (err, rows) => {
+        db.query('SELECT * FROM user', (err, rows) => {
             if (err) {
                 return reject(err);
             } else {
