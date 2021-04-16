@@ -10,7 +10,19 @@ const {
 const router = require('express').Router();
 const { checkToken } = require('../../middlewares');
 
-// ALL the chores of a user (and we got a JSON) 
+//ALL the chores
+
+router.get('/', async (req, res) => {
+
+    try {
+        const chores = await getAll();
+        res.json(chores);
+    } catch (error) {
+        res.json({ error: error.message });
+    }
+});
+
+// ALL the chores of a user (and we got a JSON)
 router.get('/:pId', async (req, res) => {
     // Id of user -> Middleware checkToken!
 

@@ -23,6 +23,7 @@ const { checkToken } = require('../../middlewares');
 router.post('/login', async (req, res) => {
     // Compruebo si el email está en la BDc
     const user = await getByEmail(req.body.email);
+    console.log(user);
     if (user) {
         // Compruebo si las password coinciden
         const equal = bcrypt.compareSync(req.body.password, user.password);
@@ -66,8 +67,6 @@ router.get('/', async (req, res) => {
 router.get('/profile', checkToken, async (req, res) => {
     try {
         const user = await getById(req.userId);
-        // console.log('holaaaaaaaaaaa', user);
-
         const chore = await getChoresByUserId(req.userId);
         user.chores = chore;
         res.json(user);
