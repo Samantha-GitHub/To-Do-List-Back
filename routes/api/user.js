@@ -90,18 +90,20 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Borro un user
+// Delete a user
 router.delete('/', checkToken, async (req, res) => {
     try {
         req.body.id = req.userId;
-        const user = await deleteById(req.body);
+        const user = await deleteById(req.body.id);
+        console.log('log de user', user);
+        console.log('log de req.body.id', req.body.id);
         res.json(user);
     } catch (error) {
         res.status(422).json({ error: error.message });
     }
 });
 
-// Actualizo un user
+// Update a user
 router.put('/', checkToken, async (req, res) => {
     try {
         req.body.id = req.userId;

@@ -91,7 +91,7 @@ const updateById = ({
     });
 };
 
-// DELETE FREELANCER
+// DELETE A USER
 const deleteById = (pId) => {
     return new Promise((resolve, reject) => {
         db.query('DELETE from user WHERE id = ?', [pId], (err, result) => {

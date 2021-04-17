@@ -80,15 +80,7 @@ router.put('/:idChore', checkToken, async (req, res) => {
         res.status(422).json({ error: error.message });
     }
 
-    /*  const json = {
-       id: req.params.idChore,
-       fk_user: req.userId,
-       title: req.body.title,
-       detail: req.body.detail,
-   };
-   console.log(json);
-   const result = await updateByIdToken(json);
-   res.json(result); */
+
 });
 
 
