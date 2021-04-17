@@ -51,7 +51,7 @@ router.delete('/:idChore', checkToken, async (req, res) => {
     try {
         const json = {
             id: req.params.idChore,
-            fk_usuario: req.userId,
+            fk_user: req.userId,
         };
         console.log(json);
         const result = await deleteByIdToken(json);
