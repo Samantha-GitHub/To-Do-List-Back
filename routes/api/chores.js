@@ -62,13 +62,33 @@ router.delete('/:idChore', checkToken, async (req, res) => {
 });
 
 // Actualizo un Chore
-router.put('/', async (req, res) => {
+router.put('/:idChore', checkToken, async (req, res) => {
     try {
+
+
+        req.body.fk_user = req.userId;
+        req.body.id = req.params.idChore;
         const result = await updateByIdToken(req.body);
         res.json(result);
+        console.log('this is result', result);
+        console.log('this is id', id);
+        console.log('this is fk_user', fk_user);
+        console.log('this is req.body', req.body);
+
+
     } catch (error) {
         res.status(422).json({ error: error.message });
     }
+
+    /*  const json = {
+       id: req.params.idChore,
+       fk_user: req.userId,
+       title: req.body.title,
+       detail: req.body.detail,
+   };
+   console.log(json);
+   const result = await updateByIdToken(json);
+   res.json(result); */
 });
 
 

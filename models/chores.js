@@ -56,14 +56,16 @@ const updateByIdToken = ({
     id,
     title,
     detail,
+    fk_user
 }) => {
     return new Promise((resolve, reject) => {
         db.query(
-            'UPDATE chores set title = ?, detail = ? WHERE id = ?',
+            'UPDATE chores set title = ?, detail = ? WHERE id = ? and fk_user = ?',
             [
                 title,
                 detail,
                 id,
+                fk_user
             ],
             (err, result) => {
                 if (err) return reject(err);
