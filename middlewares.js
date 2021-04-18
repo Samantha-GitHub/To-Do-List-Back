@@ -2,12 +2,12 @@ const jwt = require('jsonwebtoken');
 const dayjs = require('dayjs');
 
 const checkToken = (req, res, next) => {
-    // 1 - Comprobar si el token está en las cabeceras
+    // 1 - Checking if token is in headers
     if (!req.headers['authorization']) {
         return res.json({ error: 'You must includes the headers Authorization' });
     }
 
-    // 2 - Comprobar si el token es válido
+    // 2 - Checking if token is valid
     const token = req.headers['authorization'];
     let data;
     try {
@@ -16,12 +16,11 @@ const checkToken = (req, res, next) => {
         return res.json({ error: "The token isn't correct" });
     }
 
-    // 3 - Comprobar si el token está caducado
+    // 3 - Checking if token has expired
     if (dayjs().unix() > data.caduca) {
         return res.json({ error: 'The token expired' });
     }
 
-    // Incluir en la petición el ID del USUARIO que está realizando dicha petición
     req.userId = data.userId;
 
     next();

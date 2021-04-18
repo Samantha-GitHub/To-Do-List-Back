@@ -24,7 +24,6 @@ router.get('/', async (req, res) => {
 
 // ALL the chores of a user (and we got a JSON)
 router.get('/:pId', async (req, res) => {
-    // Id of user -> Middleware checkToken!
 
     try {
         const chores = await getChoresByUserId(req.params.pId);
@@ -61,7 +60,7 @@ router.delete('/:idChore', checkToken, async (req, res) => {
     }
 });
 
-// Actualizo un Chore
+// Update a Chore
 router.put('/:idChore', checkToken, async (req, res) => {
     try {
 

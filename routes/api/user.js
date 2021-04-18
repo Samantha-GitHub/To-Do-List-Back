@@ -21,11 +21,9 @@ const { checkToken } = require('../../middlewares');
 
 // Body -> email, password
 router.post('/login', async (req, res) => {
-    // Compruebo si el email está en la BDc
     const user = await getByEmail(req.body.email);
     console.log(user);
     if (user) {
-        // Compruebo si las password coinciden
         const equal = bcrypt.compareSync(req.body.password, user.password);
         if (equal) {
             res.json({
@@ -50,10 +48,8 @@ function createToken(pUser) {
 }
 /* END TOKEN Y MIDDLEWARE */
 
-// Recupera todos los user y devuelve JSON
+// GET ALL USER
 router.get('/', async (req, res) => {
-    // Id de user inyectado por el Middleware checkToken!
-    // console.log(req.userId);
 
     try {
         const user = await getAll();
@@ -63,7 +59,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Recupera UN unico user by ID para pintarlo por TOKEN
+// GET BY ID USER
 router.get('/profile', checkToken, async (req, res) => {
     try {
         const user = await getById(req.userId);
@@ -77,10 +73,8 @@ router.get('/profile', checkToken, async (req, res) => {
     }
 });
 
-// Crear un nuevo user
-// Los datos para crear el user, me llegan a través del BODY
+// CREATE USER
 router.post('/', async (req, res) => {
-    // console.log(req.body);
     try {
         req.body.password = bcrypt.hashSync(req.body.password, 10);
         const result = await create(req.body);
@@ -90,7 +84,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Delete a user
+// Delete user
 router.delete('/', checkToken, async (req, res) => {
     try {
         req.body.id = req.userId;
@@ -103,7 +97,7 @@ router.delete('/', checkToken, async (req, res) => {
     }
 });
 
-// Update a user
+// Update user
 router.put('/', checkToken, async (req, res) => {
     try {
         req.body.id = req.userId;
