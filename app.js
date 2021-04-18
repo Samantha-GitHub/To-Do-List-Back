@@ -5,17 +5,17 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-// Conexion a la BD 
+// Connect to BD 
 
 const connect = require('./dbConfig');
 connect()
 
 const indexRouter = require('./routes/index');
 
-// RUTA API
+// CONNECT to API
 const apiRouter = require('./routes/api');
 
-// RUTA BACKEND
+// CONNECT to BACKEND
 const app = express();
 
 
